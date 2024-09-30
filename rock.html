@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        const rock = 1;
+        const paper = 2;
+        const scissor = 3;
+        const win = "You win!";
+        const lose = "You lose!";
+        const tie = "It's a tie!";
+        let humanscore=0;
+        let cpuscore=0;
+        
+        function getUserInput() {
+            let userInput = prompt("Type 1 for Rock, 2 for Paper, 3 for Scissors");
+            if (userInput == 1) {
+                return "rock";
+            } else if (userInput == 2) {
+                return "paper";
+            } else if (userInput == 3) {
+                return "scissor";
+            } else {
+                alert("Please enter 1, 2, or 3 only");
+                return null; // Return null if the input is invalid
+            }
+        }
+
+        function getCpuChoice() {
+            let cpu = Math.floor(Math.random() * 3) + 1;
+            if (cpu == 1) {
+                return "rock";
+            } else if (cpu == 2) {
+                return "paper";
+            } else {
+                return "scissor";
+            }
+        }
+
+        function result() {
+            let user = getUserInput();
+            if (!user) return; // Stop if user input was invalid
+            let cpu = getCpuChoice();
+            
+            
+            
+
+            
+            alert("You chose: " + user);
+            alert("CPU chose: " + cpu);
+
+            if (user === cpu) {
+                alert(tie);
+            } else if (
+                (user === "rock" && cpu === "scissor") ||
+                (user === "paper" && cpu === "rock") ||
+                (user === "scissor" && cpu === "paper")
+            ) {
+                humanscore += 1;
+                alert(win);
+                
+                
+                
+
+                
+            } else {
+                cpuscore += 1;
+                alert(lose);
+                
+                
+            }
+
+            alert("Your score: " + humanscore + " | CPU score: " + cpuscore);
+        }
+        
+
+        function game() {
+            result();
+            
+            
+
+        }
+        
+
+        game();
+        game();
+        game();
+        game();
+        game();
+    </script>
+</body>
+</html>

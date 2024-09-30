@@ -7,15 +7,16 @@
 </head>
 <body>
     <script>
-        const rock = 1;
-        const paper = 2;
-        const scissor = 3;
+        // first of let's declare some variables
+        //rock = 1;
+        //paper = 2;
+        //scissor = 3;
         const win = "You win!";
         const lose = "You lose!";
         const tie = "It's a tie!";
         let humanscore=0;
         let cpuscore=0;
-        
+        // this function will take user input(1,2,3) and return a (rock,paper,scissor) in this order
         function getUserInput() {
             let userInput = prompt("Type 1 for Rock, 2 for Paper, 3 for Scissors");
             if (userInput == 1) {
@@ -30,6 +31,8 @@
             }
         }
 
+        //now this function will be genertating a random number (1,2,3) doing the same thing in the above function just this time for the cpu choice
+         
         function getCpuChoice() {
             let cpu = Math.floor(Math.random() * 3) + 1;
             if (cpu == 1) {
@@ -41,7 +44,11 @@
             }
         }
 
-        function result() {
+
+
+       // the game function will be displaying both the user and cpu choices , after that it will be comparing to see who wins,displaying (win,lose,tie) from the variables above
+       // also this function will keep track of the score by Incrementing the two score variables
+       function game() {
             let user = getUserInput();
             if (!user) return; // Stop if user input was invalid
             let cpu = getCpuChoice();
@@ -78,19 +85,19 @@
         }
         
 
-        function game() {
-            result();
+        function playround() {
+            game();
             
             
 
         }
         
 
-        game();
-        game();
-        game();
-        game();
-        game();
+        playround();
+        playround();
+        playround();
+        playround();
+        playround();
     </script>
 </body>
 </html>

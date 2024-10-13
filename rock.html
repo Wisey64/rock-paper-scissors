@@ -4,35 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #282c34; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            width: 100px; 
+            height: 100px; 
+            border: 2px solid yellow; 
+            border-radius: 5px; 
+            background-color: transparent; 
+            color: white; 
+            font-size: 20px; 
+            cursor: pointer; 
+        }
+        button:hover {
+            background-color: rgba(255, 255, 0, 0.2); 
+        }
+        .choicediv, .mesdiv, .scorediv {
+            margin-top: 10px; 
+            font-size: 18px; 
+        }
+    </style>
 </head>
 <body>
+    <div class="header">
+        <h1>ROCK PAPER SCISSORS</h1>
+    </div>
+    <h2>Choose your weapon</h2>
+
     <script>
-        // first of let's declare some variables
-        //rock = 1;
-        //paper = 2;
-        //scissor = 3;
+        // Declare some variables
         const win = "You win!";
         const lose = "You lose!";
         const tie = "It's a tie!";
-        let humanscore=0;
-        let cpuscore=0;
-        // this function will take user input(1,2,3) and return a (rock,paper,scissor) in this order
-        function getUserInput() {
-            let userInput = prompt("Type 1 for Rock, 2 for Paper, 3 for Scissors");
-            if (userInput == 1) {
-                return "rock";
-            } else if (userInput == 2) {
-                return "paper";
-            } else if (userInput == 3) {
-                return "scissor";
-            } else {
-                alert("Please enter 1, 2, or 3 only");
-                return null; // Return null if the input is invalid
-            }
-        }
+        let humanscore = 0;
+        let cpuscore = 0;
 
-        //now this function will be genertating a random number (1,2,3) doing the same thing in the above function just this time for the cpu choice
-         
+        // Function to generate a random choice for the CPU
         function getCpuChoice() {
             let cpu = Math.floor(Math.random() * 3) + 1;
             if (cpu == 1) {
@@ -44,60 +65,87 @@
             }
         }
 
-
-
-       // the game function will be displaying both the user and cpu choices , after that it will be comparing to see who wins,displaying (win,lose,tie) from the variables above
-       // also this function will keep track of the score by Incrementing the two score variables
-       function game() {
-            let user = getUserInput();
+        // Function to handle the game logic
+        function game(playerSelection) {
+            let user = playerSelection;
             if (!user) return; // Stop if user input was invalid
             let cpu = getCpuChoice();
-            
-            
-            
 
-            
-            alert("You chose: " + user);
-            alert("CPU chose: " + cpu);
+            // Display choices
+            choicediv.textContent = "You chose: " + user + " | CPU chose: " + cpu;
 
+            // Determine the result
+            let message;
             if (user === cpu) {
-                alert(tie);
+                message = tie;
             } else if (
                 (user === "rock" && cpu === "scissor") ||
                 (user === "paper" && cpu === "rock") ||
                 (user === "scissor" && cpu === "paper")
             ) {
                 humanscore += 1;
-                alert(win);
-                
-                
-                
-
-                
+                message = win;
             } else {
                 cpuscore += 1;
-                alert(lose);
-                
-                
+                message = lose;
             }
 
-            alert("Your score: " + humanscore + " | CPU score: " + cpuscore);
+            // Update the message display
+            mesdiv.textContent = message;
+            scorediv.textContent = "Your score: " + humanscore + " | CPU score: " + cpuscore;
         }
-        
 
-        function playround() {
-            game();
-            
-            
-
+        function playround(playerSelection) {
+            game(playerSelection);
         }
-        
 
-        playround();
-        playround();
-        playround();
-        playround();
-        playround();
+        // Create a button container div
+        const btndiv = document.createElement("div");
+        btndiv.classList.add("btndiv");
+        document.body.appendChild(btndiv);
+        btndiv.setAttribute("style", "display:flex;flex-direction:row;justify-content:center;align-items:center;gap:10px; margin:10px");
+
+        // Create Rock button
+        const rock = document.createElement("button");
+        rock.classList.add("rock", "b");
+        rock.textContent = "rock";
+        btndiv.appendChild(rock);
+
+        // Create Paper button
+        const paper = document.createElement("button");
+        paper.classList.add("paper", "b");
+        paper.textContent = "paper";
+        btndiv.appendChild(paper);
+
+        // Create Scissor button
+        const scissor = document.createElement("button");
+        scissor.textContent = "scissor";
+        scissor.classList.add("scissor", "b");
+        btndiv.appendChild(scissor);
+
+        // Add a div to show choices
+        const choicediv = document.createElement("div");
+        choicediv.classList.add("choicediv");
+        document.body.appendChild(choicediv);  
+
+        // Add a div to show messages
+        const mesdiv = document.createElement("div");
+        mesdiv.classList.add("mesdiv");
+        document.body.appendChild(mesdiv);
+
+        // Add a div to show scores
+        const scorediv = document.createElement("div");
+        scorediv.classList.add("scorediv");
+        document.body.appendChild(scorediv);
+
+        // Add event listeners to the buttons
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const playerSelection = button.textContent.toLowerCase();
+                playround(playerSelection);
+            });
+        });
     </script>
 </body>
 </html>
